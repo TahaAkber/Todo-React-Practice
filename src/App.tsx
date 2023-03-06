@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import InputField from './components/InputField';
+import Todolist from './components/Todolist';
+import { Todo } from './model';
+//function compnents
+const App: React.FC= ()=>{
+  const [todo, settodo] = React.useState<string>("");
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  //array of a type or interface
+  const [todos, settodos] = React.useState<Todo[]>([])
+  const handleAdd = (e:React.FormEvent)=>{
+    e.preventDefault();
+if(todo){
+    settodos([...todos,{id:Date.now(),todo,isDone:false}])
+  settodo("");
 }
+  };
+console.log(todos);
+  console.log(todo);
+  return  ( 
+  <div className="App">
+    <span className="Heading">Taskify
+    </span>
+    <InputField todo={todo} setTodo={settodo} handleAdd={handleAdd}/>
+    <Todolist/>
+  </div>
+  );
+};
 
 export default App;
