@@ -8,11 +8,11 @@ const App: React.FC= ()=>{
   const [todo, settodo] = React.useState<string>("");
 
   //array of a type or interface
-  const [todos, settodos] = React.useState<Todo[]>([])
+  const [todos, setTodos] = React.useState<Todo[]>([])
   const handleAdd = (e:React.FormEvent)=>{
     e.preventDefault();
 if(todo){
-    settodos([...todos,{id:Date.now(),todo,isDone:false}])
+    setTodos([...todos,{id:Date.now(),todo,isDone:false}])
   settodo("");
 }
   };
@@ -23,9 +23,9 @@ console.log(todos);
     <span className="Heading">Taskify
     </span>
     <InputField todo={todo} setTodo={settodo} handleAdd={handleAdd}/>
-    <Todolist/>
+    <Todolist todos={todos} setTodos={setTodos}/>
   </div>
   );
-};
+}; 
 
 export default App;
